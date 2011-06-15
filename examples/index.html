@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>jQuery eTextarea Plugin by Abhishek Dev</title>
+<!--<link rel="stylesheet" href="lib/yuiReset.css"/>-->
+<link rel="stylesheet" href="lib/syntaxhighlighter-JS/styles/shCoreDefault.css"/>
+<link rel="stylesheet" href="../jQuery.eTextarea.css"/>
+<script src="lib/syntaxhighlighter-JS/scripts/shCore.js"></script>
+<script src="lib/syntaxhighlighter-JS/scripts/shBrushJScript.js"></script>
+<script src="lib/syntaxhighlighter-JS/scripts/shBrushCss.js"></script>
+<script src="lib/jquery-1.4.2.min.js"></script>
+<script src="../jQuery.eTextarea.min.js"></script>
+<script>
+var init = {
+	page : function(){
+			$("#basic").eTextarea();
+			$("#textbox").eTextarea({emulateTextbox: true,resize:false});
+			$("#textboxWithRowAttr1").eTextarea();
+			$("#textboxWithMaxHeight").eTextarea();
+			$("#forced").eTextarea({resize:false});
+			$("#userText").bind("keyup",init.onUserChangedText);
+		},
+	onUserChangedText : function(){
+		$("#forced").val(this.value)
+					.eTextarea("update");
+		}
+}
+
+
+$(function(){
+	init.page();
+	SyntaxHighlighter.highlight();
+});
+</script>
+</head>
+
+<body>
+<section>
+  <h2>Basic usage:</h2>
+  <textarea id="basic"></textarea>
+  <pre class="brush: js" title="To make textarea expandable">
+  $("#basic").eTextarea(); 
+  </pre>
+</section>
+<section>
+  <h2>Single Line textarea:</h2>
+  <label>Textarea initialized with {emulateTextbox: true}</label>
+  <textarea id="textbox"></textarea>
+  <br/>
+  <label>Textarea with attribute rows="1"</label>
+  <textarea id="textboxWithRowAttr1" rows="1"></textarea>
+  <pre class="brush: js" title="Make textarea behave like textbox">
+  $("#textbox").eTextarea({emulateTextbox: true, resize: false });
+  $("#textboxWithRowAttr1").eTextarea();
+  </pre>
+</section>
+<section>
+  <h2>Finitley Growing Textarea:</h2>
+  <label>Textarea initialized with max-height:200px</label>
+  <textarea id="textboxWithMaxHeight" style="max-height:200px"></textarea>
+  <pre class="brush: js" title="Textarea height restricted with CSS max height set on it">
+  $("#textboxWithMaxHeight").eTextarea();
+  </pre>
+</section>
+<section>
+  <h2>Force update the textarea:</h2>
+  <textarea id="forced"></textarea>
+  <textarea id="userText">Enter text to programmatically update with</textarea>
+  <pre class="brush: js" title="To force update a textarea after a programmatic value update">
+  $("#forced").eTextarea("update");
+  </pre>
+</section>
+</body>
+</html>

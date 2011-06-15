@@ -1,0 +1,38 @@
+/* eTextarea Style
+----------------------------------*/
+
+/* @group eTextarea */
+
+/* NOTE: Recommended to set line-height on textarea for accurate resizing by eTextarea plug-in IE.*/
+
+textarea.ui-eTextarea {
+	font: 13px/1.231 arial,helvetica,clean,sans-serif;
+	margin: 0;
+	padding: 0;
+	line-height: 15px; /*set = floor(lineheight)*/
+	min-height: 45px;  /*set = 3 x lineheight*/
+	height: 45px;      /*set = 3 x lineheight*/
+	width: 300px
+}
+
+/* Default multiline textarea 3 times taller than input textbox*/
+
+textarea.ui-eTextarea.oneLine {
+	min-height: 15px; /*set = floor(lineheight)*/
+	height: 15px;     /*set = floor(lineheight)*/
+}
+
+textarea.ui-eTextarea.noResize{
+	resize: none
+}
+
+/* Optionally needed for the eTextarea plug-in*/
+
+.eTextarea {
+	position: absolute;
+	word-wrap: break-word;
+	top: 0;
+	-left: -9999px
+}
+
+/* @end */
