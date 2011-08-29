@@ -1,6 +1,6 @@
 # jQuery eTextarea #
 
-Version: v1.0.1, Last updated: 2/Jun/2011
+Version: v1.0.2, Last updated: 29/Aug/2011
 
 jQuery eTextarea updates a normal textarea control to resize based on the text it holds. Makes it resize when the user is editing text in it. It respects the CSS max-height set on a textarea
 Improves on the code of the elastic plugin and autoexpand by making it layout independent (All trackers are placed in a single container as a direct child of body). The trackers are created on the fly only when they are needed. 
@@ -26,6 +26,7 @@ Opera 10, Firefox 2/3, IE 7/8, Safari 5, Chrome 6
 
 ## Release History ##
 
+1.0.2 - (29/Aug/2011) IE8 Fixes
 1.0.1 - (2/Jun/2011) Initial release  
 
 
