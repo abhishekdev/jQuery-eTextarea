@@ -55,7 +55,7 @@ $.fn.eTextarea = function (userOption) {
 		var $textarea, _minHeight, _maxHeight, _lineHeight,
 			copyCatID, copyCat, copyCatContainer,
 			cssProperties, timeRef, updateInProgress,
-			createCopyCat, destroyCopyCat, addkeyEvents, update, forceUpdate, opt, radix=10, nmsp = "eTextarea";
+			createCopyCat, destroyCopyCat, addkeyEvents, update, forceUpdate, opt, radix=10, nmsp = ".eTextarea", isCopyCatInUse = false;
 
 		// Only work on textarea
 		if (element.type != 'textarea') {
@@ -79,8 +79,12 @@ $.fn.eTextarea = function (userOption) {
 
 		// Create a dummy element used to track and manage height of textarea
 		createCopyCat = function () {
+		if(!isCopyCatInUse){
 			copyCatID = "" + $textarea.attr("id") + "_flexi_" + Math.floor(Math.random() * 99999);
 			copyCat = $("<div></div>", { id: copyCatID, "class": "eTextarea" });
+		}else{
+			copyCat.detach();
+		}
 			copyCatContainer = $("#eTextareaTrack");
 			cssProperties = [
 				'paddingTop',
@@ -100,8 +104,8 @@ $.fn.eTextarea = function (userOption) {
 				$('body').append(copyCatContainer);
 			}
 
-			// Append trackers for textareas to it
-			copyCatContainer.append(copyCat);
+			
+
 
 			// Fallback if the CSS class eTextarea is not applied from file! overhead vs. robustness
 			copyCat.css({ position: "absolute", top: 0, left: "-9999px", 'word-wrap': 'break-word' });
@@ -118,13 +122,18 @@ $.fn.eTextarea = function (userOption) {
 			*/
 
 			copyCat.css("overflowX", "auto");
+			// Append trackers for textareas to it
+			copyCatContainer.append(copyCat);
 		};
 
 		// Remove dummy elements and events when no longer needed
 		destroyCopyCat = function () {
-			$textarea.unbind('keyup.eTextarea');
-			$textarea.unbind('keypress.eTextarea');
-			copyCat.remove();
+			if(!isCopyCatInUse){
+				$textarea.unbind('keyup.eTextarea');
+				$textarea.unbind('keypress.eTextarea');
+				copyCat.remove();
+				copyCat = null;
+			}
 		};
 
 		// Update height of textarea to match with that of the dummy div
@@ -142,7 +151,6 @@ $.fn.eTextarea = function (userOption) {
 				* for single line textareas dont show next line, else show it.
 				* This solves the glitch effect and also makes the textarea more usable my letting the user clearly see the end of content
 				*/
-
 				// if the height mismatches
 				if (Math.abs(correctedHeight - _elHeight) > 3) {
 
@@ -229,6 +237,7 @@ $.fn.eTextarea = function (userOption) {
 			.bind('focus'+nmsp, function (e) {
 				createCopyCat();
 				addkeyEvents();
+				isCopyCatInUse = true;
 			});
 		}
 
@@ -236,8 +245,9 @@ $.fn.eTextarea = function (userOption) {
 		function addBlurEvent() {
 			$textarea.unbind('blur'+nmsp)
 			.bind('blur'+nmsp, function (e) {
-				$("#status").text("blur trig");
+				isCopyCatInUse = false;
 				destroyCopyCat();
+				
 			});
 		}
 		
@@ -254,7 +264,7 @@ $.fn.eTextarea = function (userOption) {
 		function setOverflowAndHeight(overflow, height) {
 			var correctedHeight = Math.floor(parseInt(height,radix)),
 				currentHeight = $textarea.height();
-				
+
 			if (currentHeight != correctedHeight || currentHeight == _maxHeight ) {
 				if (typeof overflow === "string") {
 					$textarea.css({ 'overflow': overflow, 'height': correctedHeight + 'px' });
