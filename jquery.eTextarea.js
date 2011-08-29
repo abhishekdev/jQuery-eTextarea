@@ -1,11 +1,11 @@
 /** @license
-jQuery eTextarea - v1.0.1 - 02/Jun/2011 
+jQuery eTextarea - v1.0.2 - 29/Aug/2011 
 Copyright (C) 2011 by Abhishek Dev
 MIT License @ http://bit.ly/abhishekdevMIT-License
 */
 
 /*!
-jQuery eTextarea - v1.0.1 - 02/Jun/2011 
+jQuery eTextarea - v1.0.2 - 29/Aug/2011 
 Copyright (C) 2011 by Abhishek Dev
 MIT License @ http://bit.ly/abhishekdevMIT-License
 */
@@ -18,8 +18,8 @@ MIT License @ http://bit.ly/abhishekdevMIT-License
   <em>
   --credits     Inspired from the "elastic plugin" by Jan Jarfalk (http://unwrongest.com/projects/elastic/) 
   				and from http://scrivna.com "autoexpand function"
-  --modified    2011-Jun-04 by Abhishek Dev
-  --version     1.0.1
+  --modified    2011-Aug-29 by Abhishek Dev
+  --version     1.0.2
   </em>
 * @requires    jQuery 1.4.2
 */
@@ -75,7 +75,7 @@ $.fn.eTextarea = function (userOption) {
 			_maxHeight = Number.MAX_VALUE;
 		}
 
-		$textarea.css({ overflow: 'hidden', overflowX: 'auto' });
+		$textarea.css({ overflowY: 'hidden', overflowX: 'auto' });
 
 		// Create a dummy element used to track and manage height of textarea
 		createCopyCat = function () {
