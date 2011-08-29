@@ -27,6 +27,7 @@ Opera 10, Firefox 2/3, IE 7/8, Safari 5, Chrome 6
 ## Release History ##
 
 1.0.2 - (29/Aug/2011) IE8 Fixes
+
 1.0.1 - (2/Jun/2011) Initial release  
 
 
